@@ -43,8 +43,8 @@ function Grid() {
       container: mapRef.current || '',
       style: `https://map.ir/vector/styles/main/mapir-xyz-light-style.json`,
       center: [51.395, 36.024],
-      zoom: 12,
-      pitch: 60,
+      zoom: 6,
+      pitch: 0,
       interactive: true,
       // hash: true,
       attributionControl: true,
@@ -65,7 +65,7 @@ function Grid() {
 
     const fullScreen = new mapboxGl.FullscreenControl();
 
-    map.once('load', () => {
+    map.on('load', () => {
       map.resize();
       map.addLayer(GridLayer);
       if (!map.hasControl(fullScreen)) map.addControl(fullScreen);

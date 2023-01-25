@@ -57,7 +57,7 @@ function Hex() {
 
     const fullScreen = new mapboxGl.FullscreenControl();
 
-    map.once('load', () => {
+    map.on('load', () => {
       map.resize();
       map.addLayer(HexLayer);
       if (!map.hasControl(fullScreen)) map.addControl(fullScreen);

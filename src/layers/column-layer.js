@@ -71,7 +71,7 @@ function Column() {
 
     const fullScreen = new mapboxGl.FullscreenControl();
 
-    map.once('load', () => {
+    map.on('load', () => {
       map.resize();
       map.addLayer(ColLayer);
       !map.hasControl(fullScreen) && map.addControl(fullScreen);

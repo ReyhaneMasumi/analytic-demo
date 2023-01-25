@@ -57,6 +57,90 @@ function Arc() {
           coordinates: [50.895807325975454, 34.644863566733875],
         },
       },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Tehran',
+          coordinates: [51.3857, 35.6102],
+        },
+        to: {
+          name: 'Karaj',
+          coordinates: [50.97039295499192, 35.82908510455458],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Isfahan',
+          coordinates: [51.675389855396446, 32.672348200616995],
+        },
+        to: {
+          name: 'Karaj',
+          coordinates: [50.97039295499192, 35.82908510455458],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Isfahan',
+          coordinates: [51.675389855396446, 32.672348200616995],
+        },
+        to: {
+          name: 'Tehran',
+          coordinates: [51.3857, 35.6102],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Isfahan',
+          coordinates: [51.675389855396446, 32.672348200616995],
+        },
+        to: {
+          name: 'Hamadan',
+          coordinates: [48.51715054651842, 34.802691254163236],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Mashhad',
+          coordinates: [59.59740799717554, 36.30116783156029],
+        },
+        to: {
+          name: 'Gorgan',
+          coordinates: [54.43108202879756, 36.84259434066942],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Mashhad',
+          coordinates: [59.59740799717554, 36.30116783156029],
+        },
+        to: {
+          name: 'Kerman',
+          coordinates: [57.06875875070847, 30.293848098414657],
+        },
+      },
+      {
+        inbound: 34345,
+        outbound: 54545,
+        from: {
+          name: 'Mashhad',
+          coordinates: [59.59740799717554, 36.30116783156029],
+        },
+        to: {
+          name: 'Shahr-e kord',
+          coordinates: [50.85446429352157, 32.329840957074964],
+        },
+      },
     ],
     getSourcePosition: (d) => d.from.coordinates,
     getTargetPosition: (d) => d.to.coordinates,
@@ -71,7 +155,7 @@ function Arc() {
       container: mapRef.current || '',
       style: `https://map.ir/vector/styles/main/mapir-xyz-light-style.json`,
       center: [51.395, 36.024],
-      zoom: 6,
+      zoom: 4,
       pitch: 60,
       interactive: true,
       // hash: true,
@@ -91,14 +175,14 @@ function Arc() {
 
     if (!mapValue) setMap(map);
 
-    const fullScreen = new mapboxGl.FullscreenControl()
+    const fullScreen = new mapboxGl.FullscreenControl();
 
-    map.once('load', () => {
+    map.on('load', () => {
       map.resize();
       map.addLayer(arcLayer);
       !map.hasControl(fullScreen) && map.addControl(fullScreen);
     });
-  }
+  };
 
   useEffect(() => {
     if (!mapValue) initializeMap();
