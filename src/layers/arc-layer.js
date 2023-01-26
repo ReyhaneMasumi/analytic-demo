@@ -180,7 +180,7 @@ function Arc() {
     map.on('load', () => {
       map.resize();
       map.addLayer(arcLayer);
-      !map.hasControl(fullScreen) && map.addControl(fullScreen);
+      !map.hasControl(fullScreen) && map.addControl(fullScreen, 'bottom-left');
     });
   };
 
@@ -188,7 +188,12 @@ function Arc() {
     if (!mapValue) initializeMap();
   }, [mapValue]);
 
-  return <div id="map" ref={mapRef} />;
+  return (
+    <div className="section">
+      <div className="map" ref={mapRef} />
+      <span className="title">دورکاری در ایام کرونا</span>
+    </div>
+  );
 }
 
 export default Arc;

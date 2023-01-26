@@ -68,7 +68,8 @@ function Grid() {
     map.on('load', () => {
       map.resize();
       map.addLayer(GridLayer);
-      if (!map.hasControl(fullScreen)) map.addControl(fullScreen);
+      if (!map.hasControl(fullScreen))
+        map.addControl(fullScreen, 'bottom-left');
     });
   };
 
@@ -76,7 +77,12 @@ function Grid() {
     if (!mapValue) initializeMap();
   }, [mapValue]);
 
-  return <div id="map" ref={mapRef} />;
+  return (
+    <div className="section">
+      <div className="map" ref={mapRef} />
+      <span className="title">مانده‌ی جاری سپرده‌ها</span>
+    </div>
+  );
 }
 
 export default Grid;

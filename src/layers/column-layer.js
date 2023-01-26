@@ -66,23 +66,20 @@ function Column() {
     map.on('load', () => {
       map.resize();
       map.addLayer(ColLayer);
-      !map.hasControl(fullScreen) && map.addControl(fullScreen);
+      !map.hasControl(fullScreen) && map.addControl(fullScreen, 'bottom-left');
     });
-  };
-
-  const onEnterCallback = (e) => {
-    console.log('🚀 ~ file: column-layer.js:94 ~ Column ~ e', e);
-  };
-
-  const onLeaveCallback = (e) => {
-    console.log('🚀 ~ file: column-layer.js:94 ~ Column ~ e', e);
   };
 
   useEffect(() => {
     if (!mapValue) initializeMap();
   }, [mapValue]);
 
-  return <div id="map" ref={mapRef} />;
+  return (
+    <div className="section">
+      <div className="map" ref={mapRef} />
+      <span className="title">زلزله‌های بالاتر از ۳ ریشتر از ۱۳۵۰ تا ۱۴۰۱</span>
+    </div>
+  );
 }
 
 export default Column;
