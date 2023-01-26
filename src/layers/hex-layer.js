@@ -34,7 +34,7 @@ function Hex() {
     const map = new mapboxGl.Map({
       container: mapRef.current || '',
       style: `https://map.ir/vector/styles/main/mapir-xyz-light-style.json`,
-      center: [51.395, 36.024],
+      center: [51.388019, 35.701911],
       zoom: 12,
       pitch: 60,
       interactive: true,

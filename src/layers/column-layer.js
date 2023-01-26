@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxGl from 'mapbox-gl';
 import { MapboxLayer } from '@deck.gl/mapbox';
 import { ColumnLayer } from '@deck.gl/layers';
-import { saderat } from './../data/saderat.js';
+import { earthquakes } from './../data/earthquakes.js';
 import './../style.css';
 
 function Column() {
@@ -21,27 +21,19 @@ function Column() {
   const ColLayer = new MapboxLayer({
     id: 'deckgl-connections3',
     type: ColumnLayer,
-    data: saderat,
-    diskResolution: 12,
-    radius: 200,
+    data: earthquakes,
+    diskResolution: 20,
+    radius: 300,
     extruded: true,
     pickable: true,
     elevationScale: 5000,
     getPosition: (d) => d?.geometry?.coordinates || [0, 0],
-    getFillColor: (d) =>
-      d.properties['مانده ی جاری سپرده ها'] > 900
-        ? [25, 100, 70, 100]
-        : d.properties['مانده ی جاری سپرده ها'] > 800
-        ? [0, 15, 50, 100]
-        : d.properties['مانده ی جاری سپرده ها'] > 700
-        ? [0, 30, 65, 100]
-        : d.properties['مانده ی جاری سپرده ها'] > 600
-        ? [0, 45, 70, 100]
-        : d.properties['مانده ی جاری سپرده ها'] > 500
-        ? [5, 77, 80, 100]
-        : [25, 100, 70, 100],
+    getFillColor: (d) => {
+      const r = Math.sqrt(Math.max(d.properties.nst, 0));
+      return [255 - r * 15, r * 5, r * 10];
+    },
     getLineColor: [0, 0, 0],
-    getElevation: (d) => d.properties['مانده ی جاری سپرده ها'] / 100,
+    getElevation: (d) => d.properties.mag,
   });
 
   const initializeMap = () => {
@@ -76,6 +68,14 @@ function Column() {
       map.addLayer(ColLayer);
       !map.hasControl(fullScreen) && map.addControl(fullScreen);
     });
+  };
+
+  const onEnterCallback = (e) => {
+    console.log('🚀 ~ file: column-layer.js:94 ~ Column ~ e', e);
+  };
+
+  const onLeaveCallback = (e) => {
+    console.log('🚀 ~ file: column-layer.js:94 ~ Column ~ e', e);
   };
 
   useEffect(() => {
